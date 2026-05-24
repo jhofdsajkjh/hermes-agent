@@ -2442,8 +2442,17 @@ class FeishuAdapter(BasePlatformAdapter):
     def _on_p2p_chat_entered(self, data: Any) -> None:
         logger.debug("[Feishu] User entered P2P chat with bot")
 
-    def _on_message_recalled(self, data: Any) -> None:
-        logger.debug("[Feishu] Message recalled by user")
+    def _on_message_recalled(self, event):
+        logger.info(f"Feishu message recalled: {event}")
+        message_id = event.get('message_id')
+        if message_id and hasattr(self, '_gateway_runner_ref'):
+            self._gateway_runner_ref.request_interrupt(message_id=message_id)
+        # Try to interrupt the session associated with this message
+        message_id = event.get('message_id')
+        if message_id and hasattr(self, '_gateway_runner_ref'):
+            # In a real implementation, we would map message_id -> session_key
+            # For now, we attempt to find the session if we have a mapping
+            pass
         # session_key is typically platform:user_id or platform:chat_id
         # for DMs. We extract the recall event metadata.
         event = getattr(data, "event", None)
