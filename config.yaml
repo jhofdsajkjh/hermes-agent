@@ -1,0 +1,22 @@
+﻿model:
+  default: minimax-m2.1
+  provider: DIRECT_MINIMAX
+  base_url: https://api.minimax.chat/v1
+  api_key: sk-cp-_YiXKEntLjFxUEBJyxDcxxrgo-2Jfr-WH5zU9i7DlOIcMSPuwoJiBs0M5fiyxiXfOjxhHKpSb2Ds2nx6eMHKQi254wGEcOUTI9XaG1HkD4R0lBilcXo_xWc
+  api_mode: chat_completions
+providers: {}
+fallback_providers:
+- provider: DIRECT_MINIMAX
+  model: minimax-m2.1
+  base_url: https://api.minimax.chat/v1
+  api_mode: chat_completions
+- provider: custom
+  model: my-combo
+  base_url: http://localhost:20128/v1
+  api_mode: chat_completions
+custom_providers:
+- name: DIRECT_MINIMAX
+  base_url: https://api.minimax.chat/v1
+  api_key: sk-cp-_YiXKEntLjFxUEBJyxDcxxrgo-2Jfr-WH5zU9i7DlOIcMSPuwoJiBs0M5fiyxiXfOjxhHKpSb2Ds2nx6eMHKQi254wGEcOUTI9XaG1HkD4R0lBilcXo_xWc
+  api_mode: chat_completions
+  model: minimax-m2.1
